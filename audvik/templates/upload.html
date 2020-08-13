@@ -7,10 +7,16 @@
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {% for field in form %}
-            <h6>
-                {{ field.label_tag }}
-                {{ field }}
-            </h6>
+            <h5>
+            {{ field.label_tag }}<br>
+            {{ field }}
+            {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+                <p style="color: red">{{ error }}</p>
+            {% endfor %}
+            </h5>
         {% endfor %}
         <br/>
         <button type="submit" class="btn btn-primary">Upload</button>
