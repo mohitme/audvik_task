@@ -17,10 +17,9 @@ def upload(request):
     if request.method == 'POST':
         form = upForm(request.POST, request.FILES)
         if form.is_valid():
-            #form.save()
             name = form.cleaned_data.get('name')
             df = pd.read_csv(request.FILES['file'])
-            df.to_sql(name, con = engine, if_exists = 'append', chunksize = 1000)
+            df.to_sql(name, con = engine, if_exists = 'fail', chunksize = 1000)
             return render(request, 'display.html', {'data': df.to_html()})
     else:
         form = upForm()
