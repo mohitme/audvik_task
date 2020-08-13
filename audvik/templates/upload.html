@@ -6,6 +6,7 @@
         <br/>
         <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
+        <h6 style="color: red">{{ error }}</h6>
         {% for field in form %}
             <h5>
             {{ field.label_tag }}<br>
